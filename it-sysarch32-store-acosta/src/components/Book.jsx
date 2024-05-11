@@ -30,6 +30,36 @@ function Book() {
         return <p>Loading...</p>;
     }
 
+     // Handle the click event when the user clicks the "Checkout" button
+  const handleClick = async (title, price) => {
+    const stripe = await stripePromise;
+
+    // Send a request to the backend to create a checkout session
+    const response = await fetch('http://localhost:4000/create-checkout-session', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ productName, price }), // Send product name and price to the backend
+    });
+
+    if (response.ok) {
+      // If the request is successful, retrieve the session ID from the response
+      const session = await response.json();
+
+      // Redirect the user to the Stripe Checkout page using the session ID
+      const result = await stripe.redirectToCheckout({ sessionId: session.id });
+
+      if (result.error) {
+        // If there is an error during the redirect, display the error message
+        setError(result.error.message);
+      }
+    } else {
+      // If there is an error creating the checkout session, display an error message
+      setError('Error creating checkout session');
+    }
+  };
+
     return (
         <div className="grid-container book-details">
             <div className="grid-item">
@@ -40,6 +70,7 @@ function Book() {
                 <p className="book-synopsis">Synopsis: {book.summary}</p>
                 <p className="book-author">Author: {book.author}</p>
                 <p className="book-price">Price: {book.price}</p>
+                <button onClick={() => handleClick(book.title, book.price)}>Checkout</button>
             </div>
         </div>
     );

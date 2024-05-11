@@ -1,4 +1,3 @@
-// Banner.jsx
 import React from 'react';
 import bannerLogo from '../assets/secretShopBanner.webp';
 import './Banner.css';
