@@ -8,8 +8,9 @@
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
-},
+  },
   "dependencies": {
+    "@stripe/stripe-js": "^3.4.0",
     "axios": "^1.6.8",
     "bootstrap": "^5.3.3",
     "firebase": "^10.11.1",

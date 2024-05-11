@@ -5,6 +5,11 @@ import { doc, getDoc } from 'firebase/firestore';
 import shoppingCart from '../assets/shopping-cart.png';
 import './Book.css';
 
+import { loadStripe } from '@stripe/stripe-js';
+
+// Load the Stripe.js library with your publishable API key
+const stripePromise = loadStripe('pk_test_51PFBXKFVDefnONPLYmhsZqNYBE0VQpKljHZXQ0lvIYCMVK6woY4GEpZGUFHu6Zf7IjIeb5FHBsPvBvHUCk0a1b1K00dNNKSbo9'); // Replace with your publishable key
+
 function Book() {
     const { id } = useParams();
     const [book, setBook] = useState(null); 
