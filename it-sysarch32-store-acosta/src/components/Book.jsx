@@ -45,7 +45,7 @@ function Book() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ productName, price }), // Send product name and price to the backend
+      body: JSON.stringify({ title, price }), // Send product name and price to the backend
     });
 
     if (response.ok) {
